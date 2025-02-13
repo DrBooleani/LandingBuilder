@@ -12,5 +12,9 @@ export const buttonRoutes: Routes = [
   {
     path: 'texts',
     loadComponent: () => import('./controls/text-control.component').then(m => m.TextControlComponent)
+  },
+  {
+    path: 'logo',
+    loadComponent: () => import('./controls/image-control.component').then(m => m.ImageControlComponent)
   }
 ];
