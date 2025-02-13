@@ -8,5 +8,9 @@ export const buttonRoutes: Routes = [
   {
     path: 'colors',
     loadComponent: () => import('./controls/color-control.component').then(m => m.ColorControlComponent)
+  },
+  {
+    path: 'texts',
+    loadComponent: () => import('./controls/text-control.component').then(m => m.TextControlComponent)
   }
 ];

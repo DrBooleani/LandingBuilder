@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 export class SidebarComponent {
   collapsed = false;
   menuItems = [
-    { label: "Título", icon: "📝", url: 'builder/title' },
+    { label: "Textos", icon: "📝", url: 'builder/texts' },
     { label: "Logo", icon: "📷", url: 'builder/logo' },
     { label: "Cores", icon: "🎨", url: 'builder/colors' },
     { label: "Fontes", icon: "🔤", url: 'builder/fonts'},
