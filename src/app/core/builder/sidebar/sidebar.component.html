@@ -20,8 +20,10 @@
       class="flex items-center gap-3 cursor-pointer hover:bg-gray-700 p-4 rounded-lg transition w-full"
       *ngFor="let item of menuItems"
     >
+    <a [routerLink]="item.url" routerLinkActive="text-blue-500 font-bold">
       <span class="text-xl">{{ item.icon }}</span>
       <span>{{ item.label }}</span>
+    </a>
     </li>
   </ul>
 

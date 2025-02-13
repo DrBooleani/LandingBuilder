@@ -7,9 +7,10 @@ import { SidebarComponent } from "./core/builder/sidebar/sidebar.component"; // 
   standalone: true,
   imports: [RouterOutlet, SidebarComponent],
   template: `
-    <div class="flex">
-      <app-sidebar></app-sidebar>
-      <div class="flex-1">
+    <div class="flex h-screen">
+      <app-sidebar class="w-20 md:w-64 shrink-0"></app-sidebar>
+
+      <div class="flex-1 p-6 overflow-auto">
         <router-outlet></router-outlet>
       </div>
     </div>
