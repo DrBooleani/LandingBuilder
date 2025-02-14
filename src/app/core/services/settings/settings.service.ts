@@ -27,6 +27,11 @@ export class SettingsService {
   buttonShadow = signal(false);
   buttonSize = signal<"small" | "medium" | "large">("medium");
 
+  carouselImages = signal<string[]>([]);
+
+  contactEmail = signal("domain@email.com");
+  contactPhone = signal("(11) 99999-9999");
+
   constructor() {
     this.loadGoogleFonts();
   }
@@ -39,6 +44,38 @@ export class SettingsService {
     } catch (error) {
       console.error("Erro ao carregar fontes do Google Fonts", error);
     }
+  }
+
+  setCarouselImages(images: string[]) {
+    if (images.length > 4) {
+      console.warn("O carrossel suporta no máximo 4 imagens.");
+      images = images.slice(0, 4);
+    }
+    this.carouselImages.set(images);
+  }
+
+  addCarouselImage(imageUrl: string) {
+    if (this.carouselImages().length < 4) {
+      this.carouselImages.set([...this.carouselImages(), imageUrl]);
+    } else {
+      console.warn("O carrossel já tem 4 imagens.");
+    }
+  }
+
+  removeCarouselImage(index: number) {
+    const images = [...this.carouselImages()];
+    if (index >= 0 && index < images.length) {
+      images.splice(index, 1);
+      this.carouselImages.set(images);
+    }
+  }
+
+  setContactEmail(email: string) {
+    this.contactEmail.set(email);
+  }
+
+  setContactPhone(phone: string) {
+    this.contactPhone.set(phone);
   }
 
   setPrimaryBackground(color: string) {

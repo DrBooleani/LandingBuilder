@@ -17,24 +17,24 @@
 
   <ul class="flex flex-col px-6 w-full" *ngIf="!collapsed">
     <li
-      class="flex items-center gap-3 cursor-pointer hover:bg-gray-700 p-4 rounded-lg transition w-full"
+      class="flex items-center gap-1 cursor-pointer hover:bg-gray-700 p-4 rounded-lg transition w-full"
       *ngFor="let item of menuItems"
     >
     <a [routerLink]="item.url" routerLinkActive="text-blue-500 font-bold">
-      <span class="text-xl">{{ item.icon }}</span>
+      <span class="text-1xl mr-2">{{ item.icon }}</span>
       <span>{{ item.label }}</span>
     </a>
     </li>
   </ul>
 
   <div class="mt-auto w-full flex flex-col items-center pb-6" *ngIf="!collapsed">
-    <button class="bg-green-500 text-white w-4/5 py-3 rounded-lg hover:bg-green-600 transition">
+    <button class="bg-green-500 text-white w-4/5 rounded-lg hover:bg-green-600 transition">
       Salvar
     </button>
-    <button class="bg-red-500 text-white w-4/5 py-3 mt-3 rounded-lg hover:bg-red-600 transition">
+    <button class="bg-red-500 text-white w-4/5 mt-2 rounded-lg hover:bg-red-600 transition">
       Resetar
     </button>
-    <button class="bg-blue-500 text-white w-4/5 py-3 mt-3 rounded-lg hover:bg-blue-600 transition">
+    <button class="bg-blue-500 text-white w-4/5 mt-2 rounded-lg hover:bg-blue-600 transition">
       Exportar
     </button>
   </div>

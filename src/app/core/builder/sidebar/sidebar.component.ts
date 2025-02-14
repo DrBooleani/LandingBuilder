@@ -17,6 +17,8 @@ export class SidebarComponent {
     { label: "Cores", icon: "🎨", url: 'builder/colors' },
     { label: "Fontes", icon: "🔤", url: 'builder/fonts'},
     { label: "Botões", icon: "🔘", url: 'builder/button' },
+    { label: "Carousel", icon: "📷", url: 'builder/carousel' },
+    { label: "Contatos", icon: "🔤", url: 'builder/contact'},
     { label: "Preview", icon: "👀", url: 'landing'}
   ];
 

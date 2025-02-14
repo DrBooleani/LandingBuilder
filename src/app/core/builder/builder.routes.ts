@@ -20,5 +20,13 @@ export const buttonRoutes: Routes = [
   {
     path: 'fonts',
     loadComponent: () => import('./controls/font-control.component').then(m => m.FontControlComponent)
+  },
+  {
+    path: 'carousel',
+    loadComponent: () => import('./controls/carousel-control.component').then(m => m.CarouselControlComponent)
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./controls/contact-control.component').then(m => m.ContactControlComponent)
   }
 ];
