@@ -1,6 +1,7 @@
 import { NgIf } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { SettingsService } from "../../services/settings/settings.service";
 
 @Component({
   selector: "app-image-control",
@@ -11,9 +12,9 @@ import { FormsModule } from "@angular/forms";
       <h3 class="text-xl font-semibold mb-4 text-center">Configurar Logo</h3>
 
       <div class="flex flex-col items-center">
-        <div *ngIf="logoUrl" class="mb-4 relative group">
+        <div *ngIf="settings.logoUrl()" class="mb-4 relative group">
           <img
-            [src]="logoUrl"
+            [src]="settings.logoUrl()"
             alt="Logo Preview"
             class="h-24 w-24 object-contain bg-white rounded-full shadow-lg border-2 border-gray-600"
           />
@@ -25,7 +26,7 @@ import { FormsModule } from "@angular/forms";
           </button>
         </div>
 
-        <label *ngIf="!logoUrl"
+        <label *ngIf="!settings.logoUrl()"
           class="w-full h-32 flex items-center justify-center border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:border-gray-400 transition-all"
         >
           <div class="text-center">
@@ -40,7 +41,7 @@ import { FormsModule } from "@angular/forms";
         </label>
 
         <button
-          *ngIf="logoUrl"
+          *ngIf="settings.logoUrl()"
           (click)="removeLogo()"
           class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition-all"
         >
@@ -51,25 +52,20 @@ import { FormsModule } from "@angular/forms";
   `,
 })
 export class ImageControlComponent {
-  logoUrl: string | null = null;
+  settings = inject(SettingsService);
 
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.logoUrl = reader.result as string;
-        document.documentElement.style.setProperty(
-          "--logo-url",
-          `url(${this.logoUrl})`
-        );
+        this.settings.setLogoUrl(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
   }
 
   removeLogo() {
-    this.logoUrl = null;
-    document.documentElement.style.setProperty("--logo-url", "none");
+    this.settings.setLogoUrl(null);
   }
 }

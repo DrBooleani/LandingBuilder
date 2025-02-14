@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { SettingsService } from "../../services/settings/settings.service";
 
 @Component({
   selector: "app-text-control",
@@ -8,7 +9,7 @@ import { FormsModule } from "@angular/forms";
   template: `
     <div class="p-4 bg-gray-800 text-white rounded-lg shadow-lg">
       <h3 class="text-lg font-bold mb-4">Configurar Textos</h3>
-      
+
       <label class="block mb-2">Título:</label>
       <input
         type="text"
@@ -34,17 +35,26 @@ import { FormsModule } from "@angular/forms";
     </div>
   `,
 })
-export class TextControlComponent {
-  title: string = "Título Principal";
-  subtitle: string = "Subtítulo";
-  bodyText: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+export class TextControlComponent implements OnInit {
+  settings = inject(SettingsService);
+
+  title!: string;
+  subtitle!: string;
+  bodyText!: string;
+
+  ngOnInit() {
+    this.title = this.settings.titleText();
+    this.subtitle = this.settings.subtitleText();
+    this.bodyText = this.settings.bodyText();
+  }
 
   applyChanges() {
+    this.settings.setTitleText(this.title);
+    this.settings.setSubtitleText(this.subtitle);
+    this.settings.setBodyText(this.bodyText);
+
     document.documentElement.style.setProperty("--title-text", this.title);
-    document.documentElement.style.setProperty(
-      "--subtitle-text",
-      this.subtitle
-    );
+    document.documentElement.style.setProperty("--subtitle-text", this.subtitle);
     document.documentElement.style.setProperty("--body-text", this.bodyText);
   }
 }
