@@ -17,6 +17,7 @@ export class SidebarComponent {
     { label: "Cores", icon: "🎨", url: 'builder/colors' },
     { label: "Fontes", icon: "🔤", url: 'builder/fonts'},
     { label: "Botões", icon: "🔘", url: 'builder/button' },
+    { label: "Preview", icon: "👀", url: 'landing'}
   ];
 
   toggleSidebar() {
