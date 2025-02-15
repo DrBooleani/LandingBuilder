@@ -1,4 +1,4 @@
-import { Injectable, signal } from "@angular/core";
+import { effect, Injectable, signal } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
@@ -35,6 +35,10 @@ export class SettingsService {
 
   constructor() {
     this.loadGoogleFonts();
+
+    effect(() => {
+      this.setFonts([this.titleFont(), this.subtitleFont(), this.bodyFont()]);
+    });
   }
 
   async loadGoogleFonts() {
@@ -45,6 +49,25 @@ export class SettingsService {
     } catch (error) {
       console.error("Erro ao carregar fontes do Google Fonts", error);
     }
+  }
+
+  setFonts(selectedFonts: string[]) {
+    if (!selectedFonts.length) return;
+
+    const fontParams = selectedFonts
+      .map((font) => `family=${font.replace(/\s+/g, "+")}:wght@100..900`)
+      .join("&");
+
+    const googleFontsUrl = `https://fonts.googleapis.com/css2?${fontParams}&display=swap`;
+
+    let link = document.getElementById("dynamic-google-fonts") as HTMLLinkElement;
+    if (!link) {
+      link = document.createElement("link");
+      link.id = "dynamic-google-fonts";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    }
+    link.href = googleFontsUrl;
   }
 
   setCarouselImages(images: string[]) {
