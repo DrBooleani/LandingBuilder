@@ -1,17 +1,11 @@
 import { Component, OnInit, Signal, computed, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
 import { SettingsService } from "../../services/settings/settings.service";
 
 @Component({
   selector: "app-contact-form",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule],
   template: `
     <div class="bg-gray-100 text-gray-900 p-8">
       <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -19,54 +13,39 @@ import { SettingsService } from "../../services/settings/settings.service";
         <div>
           <h3 class="text-xl font-semibold mb-4">Contato</h3>
 
-          <form id="contactForm" [formGroup]="contactForm" (ngSubmit)="sendMessage()">
+          <form id="contactForm" (ngSubmit)="sendMessage()">
             <label class="block text-sm font-medium">Nome completo:</label>
             <input
               type="text"
-              formControlName="name"
+              id="name"
               class="w-full p-2 border rounded mt-1"
               placeholder="Seu nome"
+              required
             />
-            <div
-              *ngIf="
-                contactForm.get('name')?.invalid &&
-                contactForm.get('name')?.touched
-              "
-              class="text-red-600 text-sm"
-            >
+            <div id="nameError" class="text-red-600 text-sm hidden">
               Nome é obrigatório.
             </div>
 
             <label class="block text-sm font-medium mt-3">E-mail:</label>
             <input
               type="email"
-              formControlName="email"
+              id="email"
               class="w-full p-2 border rounded mt-1"
               placeholder="seu@email.com"
+              required
             />
-            <div
-              *ngIf="
-                contactForm.get('email')?.invalid &&
-                contactForm.get('email')?.touched
-              "
-              class="text-red-600 text-sm"
-            >
+            <div id="emailError" class="text-red-600 text-sm hidden">
               E-mail inválido.
             </div>
 
             <label class="block text-sm font-medium mt-3">Mensagem:</label>
             <textarea
-              formControlName="message"
+              id="message"
               class="w-full p-2 border rounded mt-1"
               placeholder="Escreva sua mensagem..."
+              required
             ></textarea>
-            <div
-              *ngIf="
-                contactForm.get('message')?.invalid &&
-                contactForm.get('message')?.touched
-              "
-              class="text-red-600 text-sm"
-            >
+            <div id="messageError" class="text-red-600 text-sm hidden">
               Mensagem é obrigatória.
             </div>
 
@@ -104,28 +83,53 @@ import { SettingsService } from "../../services/settings/settings.service";
 })
 export class ContactFormComponent implements OnInit {
   private settingsService = inject(SettingsService);
-  private fb = inject(FormBuilder);
-
-  contactForm: FormGroup = new FormGroup({});
 
   contactEmail: Signal<string> = computed(() =>
     this.settingsService.contactEmail()
   );
 
-  ngOnInit(): void {
-    this.contactForm = this.fb.group({
-      name: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-      message: ["", Validators.required],
-    });
-  }
+  ngOnInit(): void {}
 
   sendMessage() {
-    if (this.contactForm.valid) {
-      const { name, email, message } = this.contactForm.value;
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
+
+    let isValid = true;
+
+    // Validação do nome
+    if (!nameInput.value) {
+      nameError?.classList.remove('hidden');
+      isValid = false;
+    } else {
+      nameError?.classList.add('hidden');
+    }
+
+    // Validação do email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailInput.value || !emailPattern.test(emailInput.value)) {
+      emailError?.classList.remove('hidden');
+      isValid = false;
+    } else {
+      emailError?.classList.add('hidden');
+    }
+
+    // Validação da mensagem
+    if (!messageInput.value) {
+      messageError?.classList.remove('hidden');
+      isValid = false;
+    } else {
+      messageError?.classList.add('hidden');
+    }
+
+    if (isValid) {
       const subject = encodeURIComponent("Contato via site");
       const body = encodeURIComponent(
-        `Nome: ${name}\nEmail: ${email}\nMensagem: ${message}`
+        `Nome: ${nameInput.value}\nEmail: ${emailInput.value}\nMensagem: ${messageInput.value}`
       );
       window.location.href = `mailto:${this.contactEmail()}?subject=${subject}&body=${body}`;
     }
