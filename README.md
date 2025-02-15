@@ -1,59 +1,82 @@
-# LandingBuilder
+# 🚀 Landing Builder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+Landing Page Builder is an **Angular** application that allows users to create customized landing pages, offering full control over colors, fonts, buttons, images, and more. With an intuitive and reactive interface, users can preview changes in real-time.
 
-## Development server
+## 🎯 Features
 
-To start a local development server, run:
+✅ **Interactive Visual Editor** – Modify your landing page in real-time.  
+✅ **Style Control** – Easily adjust colors, fonts, and buttons.  
+✅ **Carousel Management** – Add up to 4 images to the carousel.  
+✅ **Dynamic Font Configuration** – Automatic loading of Google Fonts.  
+✅ **Download HTML Code** – Export the generated page for external use.  
 
-```bash
+---
+
+## 🏗️ Project Structure
+
+```
+landing-page-builder/
+│── src/
+│   ├── app/
+│   │   ├── core/               # Application core
+│   │   │   ├── builder/        # Editing panel
+│   │   │   │   ├── controls/   # Customization controls
+│   │   │   │   ├── preview/    # Landing page preview
+│   │   │   │   ├── sidebar/    # Configuration sidebar
+│   │   │   ├── client/         # Landing Page components
+│   │   │   │   ├── navbar/     # Navigation bar
+│   │   │   │   ├── hero/       # Hero section
+│   │   │   │   ├── carousel/   # Image carousel
+│   │   │   │   ├── features/   # Features section
+│   │   │   │   ├── footer/     # Footer
+│   │   │   ├── services/       # Configuration services
+│   │   ├── pages/              # Application pages
+│   ├── index.html              # Main page
+│   ├── main.ts                 # Main Angular file
+│   ├── styles.css              # Global styles
+```
+
+---
+
+## 🛠️ Technologies Used
+
+- **Angular** – Main framework for the project  
+- **Tailwind CSS** – For fast and responsive styling  
+- **Angular Signals** – For reactive state management  
+- **Google Fonts API** – For dynamic font loading  
+
+---
+
+## 🚀 How to Run the Project
+
+1️⃣ **Clone the repository**  
+```sh
+git clone https://github.com/DrBooleani/LandingBuilder.git
+cd LandingBuilder
+```
+
+2️⃣ **Install dependencies**  
+```sh
+npm install
+```
+
+3️⃣ **Start the development server**  
+```sh
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+4️⃣ **Access in the browser**  
+```
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📜 License
 
-## Building
+This project is under the **MIT** license.
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+Made with 💙 by [DrBooleani](https://github.com/DrBooleani)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
