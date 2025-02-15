@@ -19,7 +19,7 @@ import { SettingsService } from "../../services/settings/settings.service";
         <div>
           <h3 class="text-xl font-semibold mb-4">Contato</h3>
 
-          <form [formGroup]="contactForm" (ngSubmit)="sendMessage()">
+          <form id="contactForm" [formGroup]="contactForm" (ngSubmit)="sendMessage()">
             <label class="block text-sm font-medium">Nome completo:</label>
             <input
               type="text"
@@ -73,7 +73,6 @@ import { SettingsService } from "../../services/settings/settings.service";
             <button
               type="submit"
               class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
-              [disabled]="contactForm.invalid"
             >
               Enviar Mensagem
             </button>
@@ -86,7 +85,7 @@ import { SettingsService } from "../../services/settings/settings.service";
             <span class="text-2xl">📧</span>
             <div>
               <p class="text-lg font-semibold">E-mail</p>
-              <p class="text-gray-700">{{ contactEmail() }}</p>
+              <p class="text-gray-700 contact-email">{{ contactEmail() }}</p>
             </div>
           </div>
 
