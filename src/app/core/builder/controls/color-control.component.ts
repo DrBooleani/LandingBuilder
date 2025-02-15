@@ -22,6 +22,9 @@ import { SettingsService } from "../../services/settings/settings.service";
 
       <label class="block mb-2">Cor do Footer:</label>
       <input type="color" [(ngModel)]="settingsService.footerBackground" class="w-full mb-4" />
+
+      <label class="block mb-2">Cor do Texto:</label>
+      <input type="color" [(ngModel)]="settingsService.colorText" class="w-full mb-4" />
     </div>
   `,
 })

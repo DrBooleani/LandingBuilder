@@ -8,8 +8,12 @@ import { CommonModule } from "@angular/common";
   imports: [CommonModule],
   template: `
     <section [ngStyle]="{ 'background-color': primaryBackground() }" class="text-center py-20">
-      <h1 class="text-4xl font-bold" [ngStyle]="{ 'font-family': titleFont() }">{{ titleText() }}</h1>
-      <p class="text-lg mt-2" [ngStyle]="{ 'font-family': subtitleFont() }">{{ subtitleText() }}</p>
+      <h1 class="text-4xl font-bold" [ngStyle]="{ 'font-family': titleFont(), 'color': colorText() }">
+        {{ titleText() }}
+      </h1>
+      <p class="text-lg mt-2" [ngStyle]="{ 'font-family': subtitleFont(), 'color': colorText() }">
+        {{ subtitleText() }}
+      </p>
     </section>
   `,
 })
@@ -20,4 +24,5 @@ export class HeroSectionComponent {
   primaryBackground = computed(() => this.settings.primaryBackground());
   titleFont = computed(() => this.settings.titleFont());
   subtitleFont = computed(() => this.settings.subtitleFont());
+  colorText = computed(() => this.settings.colorText());
 }

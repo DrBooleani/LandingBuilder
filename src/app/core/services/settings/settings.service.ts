@@ -8,6 +8,7 @@ export class SettingsService {
   secondaryBackground = signal("#f4f4f4");
   contactFormBackground = signal("#e0e0e0");
   footerBackground = signal("#333333");
+  colorText = signal("#000");
 
   logoUrl = signal<string | null>(null);
 
@@ -94,6 +95,10 @@ export class SettingsService {
     this.footerBackground.set(color);
   }
 
+  setColorText(color: string) {
+    this.colorText.set(color);
+  }
+  
   setLogoUrl(url: string | null) {
     this.logoUrl.set(url);
   }
