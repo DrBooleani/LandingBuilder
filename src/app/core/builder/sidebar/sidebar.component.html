@@ -1,0 +1,29 @@
+<aside
+  class="fixed top-0 left-0 h-screen bg-gray-900 text-white shadow-lg transition-all duration-300 flex flex-col items-center"
+  [class.w-64]="!collapsed"
+  [class.w-20]="collapsed"
+>
+  <button
+    (click)="toggleSidebar()"
+    class="absolute top-6 right-4 text-white text-2xl"
+  >
+    <span *ngIf="collapsed">☰</span>
+    <span *ngIf="!collapsed">✖</span>
+  </button>
+
+  <h2 class="text-lg font-bold text-center py-6" *ngIf="!collapsed">
+    Configurações
+  </h2>
+
+  <ul class="flex flex-col px-6 w-full" *ngIf="!collapsed">
+    <li
+      class="flex items-center gap-1 cursor-pointer hover:bg-gray-700 p-4 rounded-lg transition w-full"
+      *ngFor="let item of menuItems"
+    >
+    <a [routerLink]="item.url" routerLinkActive="text-blue-500 font-bold">
+      <span class="text-1xl mr-2">{{ item.icon }}</span>
+      <span>{{ item.label }}</span>
+    </a>
+    </li>
+  </ul>
+</aside>
